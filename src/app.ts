@@ -1,9 +1,12 @@
 import Koa from "koa";
+import KoaLogger from "koa-logger";
 import bodyParser from "koa-body";
 import router from "./router/index";
 
 const app: Koa = new Koa();
+const logger = KoaLogger();
 
+app.use(logger);
 app.use(bodyParser());
 
 app.use(router.routes());
