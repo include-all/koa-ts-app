@@ -16,7 +16,7 @@ class CliShell {
   async updateFeModule(ctx: Context) {
     const body = ctx.request.body;
     console.log(body.repository.owner.node_id);
-    if (body.repository.owner.node_id === "MDQ6VXNlcjE2MzQ5ODg1") {
+    if (body.repository.owner.node_id !== "MDQ6VXNlcjE2MzQ5ODg1") {
       ctx.body = "id error";
       return;
     }
