@@ -14,9 +14,9 @@ class CliShell {
     });
   }
   async updateFeModule(ctx: Context) {
-    const body = ctx.request.body;
-    console.log(body.repository.owner.node_id);
-    if (body.repository.owner.node_id !== "MDQ6VXNlcjE2MzQ5ODg1") {
+    const payload = JSON.parse(ctx.request.body.payload);
+    console.log(payload.repository.owner.node_id);
+    if (payload.repository.owner.node_id !== "MDQ6VXNlcjE2MzQ5ODg1") {
       ctx.body = "id error";
       return;
     }
