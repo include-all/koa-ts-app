@@ -10,5 +10,5 @@ router.prefix("/api");
 
 router.get("/hello", Hello.say);
 
-router.get("/updateFeModule", CliShell.updateFeModule);
+router.post("/updateFeModule", CliShell.updateFeModule);
 export default router;
