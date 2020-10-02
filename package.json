@@ -1,0 +1,27 @@
+{
+  "name": "koa-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --watch src -e ts,tsx --exec ts-node ./src/app.ts",
+    "start": "tsc && node dist/app.js",
+    "prod": "tsc && pm2 start dist/app.js --name koa-ts",
+    "reProd": "tsc && pm2 restart koa-ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.13.0",
+    "koa-body": "^4.2.0",
+    "koa-router": "^9.4.0"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.11.4",
+    "@types/koa-router": "^7.4.1",
+    "nodemon": "^2.0.4",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  }
+}
