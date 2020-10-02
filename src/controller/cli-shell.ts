@@ -13,26 +13,11 @@ class CliShell {
       });
     });
   }
-  public static async signatureSecret(body: {}) {
-    const SECRET = "github-webhooks-secret";
-    return (
-      "sha1=" +
-      crypto
-        .createHmac("sha1", SECRET)
-        .update(JSON.stringify(body))
-        .digest("hex")
-    );
-  }
   async updateFeModule(ctx: Context) {
-    console.log(ctx.request.body);
-    // 简单的鉴权
-    const signature = await CliShell.signatureSecret(ctx.request.body);
-    console.log(`signature: ${signature}`);
-    console.log(
-      `ctx.headers["x-hub-signature"]: ${ctx.headers["x-hub-signature"]}`
-    );
-    if (signature !== ctx.headers["x-hub-signature"]) {
-      ctx.body = "secret error";
+    const body = ctx.request.body;
+    console.log(body.repository.owner.node_id);
+    if (body.repository.owner.node_id === "MDQ6VXNlcjE2MzQ5ODg1") {
+      ctx.body = "id error";
       return;
     }
     const { error, stdout } = await CliShell.execCommander(
