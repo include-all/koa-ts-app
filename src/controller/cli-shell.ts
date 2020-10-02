@@ -17,14 +17,20 @@ class CliShell {
     const SECRET = "github-webhooks-secret";
     return (
       "sha1=" +
-      crypto.createHmac("sha1", SECRET).update(body.toString()).digest("hex")
+      crypto
+        .createHmac("sha1", SECRET)
+        .update(JSON.stringify(body))
+        .digest("hex")
     );
   }
   async updateFeModule(ctx: Context) {
     console.log(ctx.request.body);
     // 简单的鉴权
     const signature = await CliShell.signatureSecret(ctx.request.body);
-    console.log(signature);
+    console.log(`signature: ${signature}`);
+    console.log(
+      `ctx.headers["x-hub-signature"]: ${ctx.headers["x-hub-signature"]}`
+    );
     if (signature !== ctx.headers["x-hub-signature"]) {
       ctx.body = "secret error";
       return;
