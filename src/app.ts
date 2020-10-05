@@ -1,13 +1,28 @@
 import Koa from "koa";
 import KoaLogger from "koa-logger";
+import dayjs from "dayjs";
 import bodyParser from "koa-body";
+import KoaJwt from "koa-jwt";
+import { JWT_SECRET } from "./config/jwt-secret";
+import parseToken from "./middleware/parseToken";
 import router from "./router/index";
 
 const app: Koa = new Koa();
-const logger = KoaLogger();
+const logger = KoaLogger((str) => {
+  console.log(dayjs().format("YYYY-MM-DD HH:mm:ss") + str);
+});
 
 app.use(logger);
+// koa-body会自动解析application/json的body
 app.use(bodyParser());
+
+app.use(parseToken);
+
+app.use(
+  KoaJwt({ secret: JWT_SECRET }).unless({
+    path: [/^\/api\/auth\/login/],
+  })
+);
 
 app.use(router.routes());
 app.use(router.allowedMethods());
