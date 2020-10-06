@@ -4,6 +4,7 @@ var exec = require("child_process").exec;
 var crypto = require("crypto");
 
 class CliShell {
+  // 封装exec为promise形式
   public static async execCommander(
     commander: String
   ): Promise<{ error: Error; stdout: String }> {
@@ -13,6 +14,8 @@ class CliShell {
       });
     });
   }
+
+  // 根据密钥签名
   public static async signatureSecret(body: {}) {
     const SECRET = "github-webhooks-secret";
     return (
@@ -23,6 +26,29 @@ class CliShell {
         .digest("hex")
     );
   }
+
+  // 执行命令，开始升级
+  public static async execUpdate(ctx: Context) {
+    const { error, stdout } = await CliShell.execCommander(
+      "cli-shell update-module main"
+    );
+    if (error) {
+      console.log(error);
+      ctx.body = {
+        errCode: 1002,
+        errMsg: error,
+      };
+    } else {
+      console.log(stdout);
+      ctx.body = {
+        data: {
+          msg: stdout,
+        },
+      };
+    }
+  }
+
+  // 根据签名验签
   async updateFeModule(ctx: Context) {
     console.log(ctx.request.body);
     // 简单的鉴权
@@ -32,20 +58,16 @@ class CliShell {
       `ctx.headers["x-hub-signature"]: ${ctx.headers["x-hub-signature"]}`
     );
     if (signature !== ctx.headers["x-hub-signature"]) {
-      ctx.body = "secret error";
+      ctx.body = {
+        errCode: 1001,
+        errMsg: "secret error",
+      };
       return;
     }
-    const { error, stdout } = await CliShell.execCommander(
-      "cli-shell update-module main"
-    );
-    if (error) {
-      console.log(error);
-      ctx.body = error;
-    } else {
-      console.log(stdout);
-      ctx.body = stdout;
-    }
+    await CliShell.execUpdate(ctx);
   }
+
+  // 根据userAgent验证
   async updateFeModuleByUserAgent(ctx: Context) {
     console.log(ctx.request.body);
     if (
@@ -55,16 +77,7 @@ class CliShell {
       ctx.body = "user-agent error";
       return;
     }
-    const { error, stdout } = await CliShell.execCommander(
-      "cli-shell update-module main"
-    );
-    if (error) {
-      console.log(error);
-      ctx.body = error;
-    } else {
-      console.log(stdout);
-      ctx.body = stdout;
-    }
+    await CliShell.execUpdate(ctx);
   }
 }
 

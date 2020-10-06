@@ -1,7 +1,7 @@
 import Router from "koa-router";
 
 // import controller
-import Hello from "../controller/hello";
+import Demo from "../controller/demo";
 import CliShell from "../controller/cli-shell";
 import Auth from "../controller/auth";
 
@@ -13,9 +13,14 @@ router.prefix("/api");
 router.post("/auth/login", Auth.login);
 router.get("/auth/testLogin", Auth.testLogin);
 
-router.get("/hello", Hello.say);
+// hello,测试
+router.get("/demo/hello", Demo.hello);
 
-router.post("/updateFeModule", CliShell.updateFeModule);
-router.post("/updateFeModuleByUserAgent", CliShell.updateFeModuleByUserAgent);
+// cliShell
+router.post("/cliShell/updateFeModule", CliShell.updateFeModule);
+router.post(
+  "/cliShell/updateFeModuleByUserAgent",
+  CliShell.updateFeModuleByUserAgent
+);
 
 export default router;
