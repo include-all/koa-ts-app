@@ -1,13 +1,13 @@
 import { Context } from "koa";
 
-class Hello {
+class Open {
   async hello(ctx: Context) {
     ctx.body = {
       data: {
-        msg: "hello world",
+        msg: "hello world, test webhooks-script",
       },
     };
   }
 }
 
-export default new Hello();
+export default new Open();

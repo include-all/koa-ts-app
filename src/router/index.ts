@@ -1,7 +1,7 @@
 import Router from "koa-router";
 
 // import controller
-import Demo from "../controller/demo";
+import Open from "../controller/open";
 import CliShell from "../controller/cli-shell";
 import Auth from "../controller/auth";
 
@@ -14,7 +14,7 @@ router.post("/auth/login", Auth.login);
 router.get("/auth/testLogin", Auth.testLogin);
 
 // hello,测试
-router.get("/demo/hello", Demo.hello);
+router.get("/open/hello", Open.hello);
 
 // cliShell
 router.post("/cliShell/updateFeModule", CliShell.updateFeModule);

@@ -26,7 +26,7 @@ app.use(parseToken);
 
 app.use(
   KoaJwt({ secret: JWT_SECRET }).unless({
-    path: [/^\/api\/auth\/login/, /^\/api\/cliShell/],
+    path: [/^\/api\/auth\/login/, /^\/api\/cliShell/, /^\/api\/open/,],
   })
 );
 
