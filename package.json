@@ -8,7 +8,8 @@
     "dev": "nodemon --watch src -e ts,tsx --exec ts-node ./src/app.ts",
     "start": "tsc && node dist/app.js",
     "prod": "tsc && pm2 start dist/app.js --name koa-ts",
-    "reProd": "tsc && pm2 restart koa-ts"
+    "reProd": "tsc && pm2 restart koa-ts",
+    "stop": "pm2 stop koa-ts"
   },
   "author": "",
   "license": "ISC",
