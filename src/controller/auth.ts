@@ -1,14 +1,15 @@
 import { Context } from "koa";
 import jsonwebtoken from "jsonwebtoken";
 import { JWT_SECRET } from "../config/jwt-secret";
+import User from "../models/user"
 
 const path = require("path");
 const fs = require("fs");
 
 interface UserInfo {
-  id?: String;
-  username: String;
-  password: String;
+  id?: number;
+  username: string;
+  password: string;
 }
 
 class Auth {
@@ -16,11 +17,14 @@ class Auth {
     const loginInfo: UserInfo = ctx.request.body;
     console.log(loginInfo);
 
-    const userFilePath = path.join(__dirname, "../../static/json/user.json");
-    const userList = JSON.parse(fs.readFileSync(userFilePath).toString());
-    const userInfo: UserInfo | undefined = userList.filter((user: UserInfo) => {
-      return user.username === loginInfo.username;
-    })[0];
+    // const userFilePath = path.join(__dirname, "../../static/json/user.json");
+    // const userList = JSON.parse(fs.readFileSync(userFilePath).toString());
+    // const userInfo: UserInfo | undefined = userList.filter((user: UserInfo) => {
+    //   return user.username === loginInfo.username;
+    // })[0];
+
+    const userInfo: UserInfo = await User.getUserLoginInfo(loginInfo.username)
+    console.log(userInfo)
 
     // 用户不存在
     if (!userInfo) {
