@@ -1,3 +1,7 @@
+/**
+ * 该文件已废弃
+ */
+
 import { Context } from "koa";
 
 var exec = require("child_process").exec;

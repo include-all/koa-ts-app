@@ -11,6 +11,10 @@ import tokenError from "./middleware/tokenError";
 
 import router from "./router/index";
 
+// 定时任务
+import scheduleStock from './schedule/stock'
+
+
 const app: Koa = new Koa();
 
 const logger = KoaLogger((str) => {
@@ -38,3 +42,5 @@ app.listen(port, () => {
   console.log(`success start server`);
   console.log(`local: http://127.0.0.1:${port}`);
 });
+
+// scheduleStock()

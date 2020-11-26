@@ -21,9 +21,9 @@ const schema = {
 }
 
 const options = {
-  createdAt: 'created_at',
-  updatedAt: 'updated_at',
+  createdAt: 'create_time',
+  updatedAt: 'update_time',
   freezeTableName: true,
 }
 
-export default { modelName, schema, options}
+export default { modelName, schema, options }
