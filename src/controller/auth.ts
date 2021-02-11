@@ -2,7 +2,6 @@ import { Context } from "koa";
 import jsonwebtoken from "jsonwebtoken";
 import { JWT_SECRET } from "../config/constant";
 import User from "../service/user"
-import { IUser } from '../model/user'
 
 // const path = require("path");
 // const fs = require("fs");
