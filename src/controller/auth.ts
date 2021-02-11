@@ -1,20 +1,15 @@
 import { Context } from "koa";
 import jsonwebtoken from "jsonwebtoken";
-import { JWT_SECRET } from "../config/jwt-secret";
-import User from "../model/user"
+import { JWT_SECRET } from "../config/constant";
+import User from "../service/user"
+import { IUser } from '../model/user'
 
 // const path = require("path");
 // const fs = require("fs");
 
-interface UserInfo {
-  id?: number;
-  username: string;
-  password: string;
-}
-
 class Auth {
   async login(ctx: Context) {
-    const loginInfo: UserInfo = ctx.request.body;
+    const loginInfo = ctx.request.body;
     console.log(loginInfo);
 
     // const userFilePath = path.join(__dirname, "../../static/json/user.json");
@@ -23,8 +18,8 @@ class Auth {
     //   return user.username === loginInfo.username;
     // })[0];
 
-    try{
-      const userInfo: UserInfo = await User.getUserLoginInfo(loginInfo.username)
+    try {
+      const userInfo = await User.getUserLoginInfo(loginInfo.username)
       console.log(userInfo)
 
       // 用户不存在
@@ -62,11 +57,11 @@ class Auth {
         success: true,
         token,
       };
-    }catch(err){
+    } catch (err) {
       console.log(err)
     }
   }
-  
+
   async testLogin(ctx: Context) {
     // 经过koa-jwt后，会将payload放在crx.state.user中
     ctx.body = { data: ctx.state.user };

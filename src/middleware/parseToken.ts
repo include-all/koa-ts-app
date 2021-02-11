@@ -1,7 +1,7 @@
 import { Context, Next } from "koa";
 
 // 从cookie中解析出token,放在koa-jwt的要求格式中
-const parseToken = async (ctx: Context, next: Next) => {
+const parseToken = async (ctx: Context, next: Next): Promise<void> => {
   const cookie = ctx.request.header.cookie || "";
   const tokenCookie = cookie.split(";").filter((item: string) => {
     return item.startsWith("app_token");

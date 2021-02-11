@@ -1,10 +1,10 @@
 import { Context } from "koa";
-const axios = require('axios')
+import axios from "axios"
 
 class Open {
   async hello(ctx: Context) {
     const res = await axios.get('http://hq.sinajs.cn/list=sh601006', {
-      headers:{
+      headers: {
         "Content-Type": "application/javascript; charset=utf8"
       }
     })

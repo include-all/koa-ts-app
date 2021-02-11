@@ -1,9 +1,9 @@
-const schedule = require('node-schedule')
-const axios = require('axios')
-const iconv = require('iconv-lite');
+import schedule from "node-schedule"
+import axios from 'axios'
+import iconv from 'iconv-lite';
 
 
-const scheduleStock = () => {
+const scheduleStock = (): void => {
   // 按照规则执行定时任务
   const rule = new schedule.RecurrenceRule();
   const dayOfWeekRule = [1, 2, 3, 4, 5]

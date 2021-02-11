@@ -24,4 +24,4 @@ pnpm-debug.log*
 *.sw?
 
 # 数据库密码，不能上传到github
-/config/db_secret.js
+/src/config/mysql_secret.ts

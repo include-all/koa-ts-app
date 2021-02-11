@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import bodyParser from "koa-body";
 import KoaJwt from "koa-jwt";
 // 配置
-import { JWT_SECRET } from "./config/jwt-secret";
+import { JWT_SECRET } from "./config/constant";
 // 中间件
 import parseToken from "./middleware/parseToken";
 import tokenError from "./middleware/tokenError";
@@ -12,7 +12,7 @@ import tokenError from "./middleware/tokenError";
 import router from "./router/index";
 
 // 定时任务
-import scheduleStock from './schedule/stock'
+// import scheduleStock from './schedule/stock'
 
 
 const app: Koa = new Koa();
@@ -37,7 +37,7 @@ app.use(
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-const port: number = 3000;
+const port = 3000;
 app.listen(port, () => {
   console.log(`success start server`);
   console.log(`local: http://127.0.0.1:${port}`);

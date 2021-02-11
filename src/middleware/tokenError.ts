@@ -1,6 +1,6 @@
 import { Context, Next } from "koa";
 
-const tokenError = async (ctx: Context, next: Next) => {
+const tokenError = async (ctx: Context, next: Next): Promise<void> => {
   return next().catch((err) => {
     if (err.status === 401) {
       ctx.status = 401;
