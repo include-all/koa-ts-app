@@ -8,6 +8,7 @@ class Open {
         "Content-Type": "application/javascript; charset=utf8"
       }
     })
+    ctx.set('Access-Control-Allow-Origin', '*');
     ctx.body = {
       data: {
         msg: res.data
